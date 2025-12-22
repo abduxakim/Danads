@@ -1,0 +1,23 @@
+import { Request, Response, NextFunction } from 'express';
+
+export const errorHandler = (
+  err: any,
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  console.error('❌ Error:', err);
+
+  // If response already started, let Express handle it
+  if (res.headersSent) {
+    return next(err);
+  }
+
+  const statusCode = err.status || 500;
+  const message = err.message || 'Internal server error';
+
+  res.status(statusCode).json({
+    error: message,
+    status: statusCode,
+  });
+};
