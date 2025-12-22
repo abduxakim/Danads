@@ -8,9 +8,7 @@ import noteStore from "../data/noteStore";
 
 
 class NoteService {
-  /**
-   * Create a new note
-   */
+
   createNote(data: CreateNoteDto): Note {
     const now = new Date().toISOString();
 

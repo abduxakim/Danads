@@ -1,23 +1,16 @@
 import { Note } from "../models/noteModel";
 
-/**
- * NoteStore is a simple in-memory storage.
- * It acts like a fake database.
- */
+
 class NoteStore {
   private notes: Note[] = [];
   private currentId = 1;
 
-  /**
-   * Return all notes
-   */
+
   getAll(): Note[] {
     return this.notes;
   }
 
-  /**
-   * Find one note by ID
-   */
+
   getById(id: number): Note | undefined {
     for (const note of this.notes) {
       if (note.id === id) {
@@ -27,9 +20,7 @@ class NoteStore {
     return undefined;
   }
 
-  /**
-   * Add a new note
-   */
+
   add(noteData: Omit<Note, "id">): Note {
     const newNote: Note = {
       ...noteData,
@@ -42,9 +33,7 @@ class NoteStore {
     return newNote;
   }
 
-  /**
-   * Update an existing note
-   */
+
   update(id: number, updates: Partial<Note>): Note | null {
     const note = this.getById(id);
 
