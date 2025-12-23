@@ -19,7 +19,7 @@ export const validateCreateNote = (
     return res.status(400).json({ error: 'Content is required', status: 400 });
   }
 
-  // Length validation
+  // Validation
   if (title.length > 200) {
     return res.status(400).json({
       error: 'Title must be 200 characters or less',

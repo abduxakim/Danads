@@ -2,6 +2,10 @@ import { Request, Response, NextFunction } from 'express';
 import noteService from '../services/noteService';
 import { CreateNoteDto, UpdateNoteDto, NoteQuery } from '../models/noteModel';
 
+//TO check error handling
+//throw new Error('Test error');
+
+
 
 export const getAllNotes = (
   req: Request,
@@ -52,7 +56,7 @@ export const getNoteById = (
         status: 404,
       });
     }
-
+    
     // Return note
     res.status(200).json(note);
   } catch (error) {
