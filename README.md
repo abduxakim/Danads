@@ -136,7 +136,7 @@ npm run dev
 http://localhost:3000/notes
 
 
-Health check:
+Status check:
 
-http://localhost:3000/health
+http://localhost:3000/status
 
