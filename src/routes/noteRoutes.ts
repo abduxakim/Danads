@@ -1,4 +1,4 @@
-import { Router } from 'express';
+import express from 'express';
 import {
   getAllNotes,
   getNoteById,
@@ -6,72 +6,23 @@ import {
   updateNote,
   deleteNote,
 } from '../controllers/noteController';
-import {
-  validateCreateNote,
-  validateUpdateNote,
-} from '../middleware/validateNote';
+import { validateCreateNote, validateUpdateNote } from '../middleware/validateNote';
 
-/*
-|--------------------------------------------------------------------------
-| Notes Routes
-|--------------------------------------------------------------------------
-| This file defines all HTTP routes related to notes.
-| Routes only map URLs to controller functions.
-| No business logic should live here.
-|--------------------------------------------------------------------------
-*/
+const router = express.Router();
 
-const router = Router();
-
-/*
-|--------------------------------------------------------------------------
-| GET /notes
-|--------------------------------------------------------------------------
-| Retrieve all notes
-| Supports:
-| - search
-| - filtering (status, priority, tags)
-| - pagination (page, limit)
-|--------------------------------------------------------------------------
-*/
+// GET /notes - Get all notes
 router.get('/', getAllNotes);
 
-/*
-|--------------------------------------------------------------------------
-| GET /notes/:id
-|--------------------------------------------------------------------------
-| Retrieve a single note by its ID
-|--------------------------------------------------------------------------
-*/
+// GET /notes/:id - Get single note
 router.get('/:id', getNoteById);
 
-/*
-|--------------------------------------------------------------------------
-| POST /notes
-|--------------------------------------------------------------------------
-| Create a new note
-| - Validation runs BEFORE controller
-|--------------------------------------------------------------------------
-*/
+// POST /notes - Create note
 router.post('/', validateCreateNote, createNote);
 
-/*
-|--------------------------------------------------------------------------
-| PUT /notes/:id
-|--------------------------------------------------------------------------
-| Update an existing note by ID
-| - Partial updates allowed
-|--------------------------------------------------------------------------
-*/
+// PUT /notes/:id - Update note
 router.put('/:id', validateUpdateNote, updateNote);
 
-/*
-|--------------------------------------------------------------------------
-| DELETE /notes/:id
-|--------------------------------------------------------------------------
-| Delete a note by ID
-|--------------------------------------------------------------------------
-*/
+// DELETE /notes/:id - Delete note
 router.delete('/:id', deleteNote);
 
 export default router;

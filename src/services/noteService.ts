@@ -21,7 +21,6 @@ class NoteService {
       createdAt: now,
       updatedAt: now,
     });
-
     return newNote;
   }
 
@@ -34,7 +33,7 @@ class NoteService {
   } {
     let notes = noteStore.getAll();
 
-    // 🔍 Search by title or content
+
     if (query.search) {
       const searchText = query.search.toLowerCase();
       notes = notes.filter(
@@ -44,17 +43,15 @@ class NoteService {
       );
     }
 
-    // 🎯 Filter by status
     if (query.status) {
       notes = notes.filter((note) => note.status === query.status);
     }
 
-    // 🎯 Filter by priority
     if (query.priority) {
       notes = notes.filter((note) => note.priority === query.priority);
     }
 
-    // 🏷 Filter by tags
+   
     if (query.tags) {
       const tags = query.tags.split(",").map((tag) => tag.trim());
       notes = notes.filter((note) =>

@@ -8,7 +8,6 @@ export const errorHandler = (
 ) => {
   console.error('❌ Error:', err);
 
-  // If response already started, let Express handle it
   if (res.headersSent) {
     return next(err);
   }

@@ -13,17 +13,13 @@ export const getAllNotes = (
   next: NextFunction
 ) => {
   try {
-    // req.query contains URL query parameters (?search=abc&page=1)
-    // We cast it to NoteQuery so TypeScript understands the shape
     const query = req.query as NoteQuery;
 
     // Call service to get filtered notes
     const result = noteService.getAllNotes(query);
 
-    // Return result with HTTP 200 (OK)
     res.status(200).json(result);
   } catch (error) {
-    // Pass any error to centralized error handler
     next(error);
   }
 };
@@ -35,7 +31,6 @@ export const getNoteById = (
   next: NextFunction
 ) => {
   try {
-    // Convert ID from string to number
     const id = Number(req.params.id);
 
  
@@ -46,9 +41,7 @@ export const getNoteById = (
       });
     }
 
-    // Ask service for note
     const note = noteService.getNoteById(id);
-
 
     if (!note) {
       return res.status(404).json({
@@ -57,7 +50,6 @@ export const getNoteById = (
       });
     }
     
-    // Return note
     res.status(200).json(note);
   } catch (error) {
     next(error);
@@ -74,10 +66,8 @@ export const createNote = (
     // req.body contains JSON sent by client
     const noteData: CreateNoteDto = req.body;
 
-    // Create note via service
     const newNote = noteService.createNote(noteData);
-
-    // Return created note with HTTP 201 (Created)
+    
     res.status(201).json(newNote);
   } catch (error) {
     next(error);
@@ -90,7 +80,6 @@ export const updateNote = (
   next: NextFunction
 ) => {
   try {
-    // Convert ID from URL to number
     const id = Number(req.params.id);
 
     
@@ -101,10 +90,8 @@ export const updateNote = (
       });
     }
 
-    // Data to update comes from request body
     const updateData: UpdateNoteDto = req.body;
 
-    // Ask service to update note
     const updatedNote = noteService.updateNote(id, updateData);
 
     
@@ -115,7 +102,6 @@ export const updateNote = (
       });
     }
 
-    // Return updated note
     res.status(200).json(updatedNote);
   } catch (error) {
     next(error);
@@ -129,7 +115,6 @@ export const deleteNote = (
   next: NextFunction
 ) => {
   try {
-    // Convert ID to number
     const id = Number(req.params.id);
 
     
@@ -140,7 +125,6 @@ export const deleteNote = (
       });
     }
 
-    // Ask service to delete note
     const deletedNote = noteService.deleteNote(id);
 
    

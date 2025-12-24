@@ -37,7 +37,6 @@ class NoteStore {
   update(id: number, updates: Partial<Note>): Note | null {
     const note = this.getById(id);
 
-    // If note does not exist
     if (!note) {
       return null;
     }
@@ -54,9 +53,7 @@ class NoteStore {
     return note;
   }
 
-  /**
-   * Delete a note by ID
-   */
+
   delete(id: number): Note | null {
     for (let i = 0; i < this.notes.length; i++) {
       if (this.notes[i].id === id) {
@@ -67,22 +64,7 @@ class NoteStore {
     }
     return null;
   }
-
-  /**
-   * Number of notes (useful for pagination)
-   */
-  count(): number {
-    return this.notes.length;
-  }
-
-  /**
-   * Remove all notes (used in testing)
-   */
-  clear(): void {
-    this.notes = [];
-    this.currentId = 1;
-  }
 }
 
-// Export ONE shared instance
+
 export default new NoteStore();

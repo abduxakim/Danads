@@ -8,11 +8,11 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Routes
+
 app.use('/notes', noteRoutes);
 
-// Health check
-app.get('/health', (req, res) => {
+
+app.get('/status', (req, res) => {
   res.status(200).json({ status: 'ok' });
 });
 
